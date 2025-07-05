@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout source
         uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -20,12 +20,11 @@ jobs:
         with:
           hugo-version: 'latest'
 
-      - name: Build Hugo site
+      - name: Build site
         run: hugo -D
-        working-directory: synthetic-workshop
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: synthetic-workshop/public
+          publish_dir: ./public
